@@ -2,7 +2,8 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:4000",
+  "proxy": "https://kiettran.azurewebsites.net",
+  "homepage": "https://flipkart.myvnc.com",
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
@@ -15,6 +16,7 @@
     "axios": "^0.25.0",
     "chart.js": "^3.7.0",
     "flipkart": "file:..",
+    "gh-pages": "^6.0.0",
     "notistack": "^2.0.3",
     "react": "^17.0.2",
     "react-chartjs-2": "^4.0.1",
@@ -37,7 +39,9 @@
     "build": "set \"GENERATE_SOURCEMAP=false\" &&  react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "analyze": "source-map-explorer 'build/static/js/*.js'"
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
