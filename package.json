@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://kiettran.azurgitewebsites.net",
+  "proxy": "https://kiettran.azurewebsites.net/",
   "homepage": "https://flipkart.myvnc.com",
   "dependencies": {
     "@emotion/react": "^11.7.1",
