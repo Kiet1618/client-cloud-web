@@ -62,7 +62,7 @@ const Payment = () => {
             };
 
             const { data } = await axios.post(
-                '/api/v1/payment/process',
+                'https://kiettran.azurewebsites.net/api/v1/payment/process',
                 paymentData,
                 config,
             );
