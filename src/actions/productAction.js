@@ -215,7 +215,7 @@ export const deleteProduct = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_PRODUCT_REQUEST });
         const config = {
-            header: {
+            headers: {
                 'Authorization': Cookies.get("token")
             }
         }
