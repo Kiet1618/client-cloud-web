@@ -191,7 +191,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
     try {
         dispatch({ type: UPDATE_PRODUCT_REQUEST });
         const config = {
-            header: {
+            headers: {
                 "Content-Type": "application/json",
                 'Authorization': Cookies.get("token")
             }
