@@ -194,9 +194,6 @@ export const updateProduct = (id, productData) => async (dispatch) => {
             header: {
                 "Content-Type": "application/json",
                 'Authorization': Cookies.get("token")
-
-
-
             }
         }
         const { data } = await axios.put(`https://kiettran.azurewebsites.net/api/v1/admin/product/${id}`, productData, config);
@@ -217,7 +214,12 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 export const deleteProduct = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_PRODUCT_REQUEST });
-        const { data } = await axios.delete(`https://kiettran.azurewebsites.net/api/v1/admin/product/${id}`);
+        const config = {
+            header: {
+                'Authorization': Cookies.get("token")
+            }
+        }
+        const { data } = await axios.delete(`https://kiettran.azurewebsites.net/api/v1/admin/product/${id}`, config);
 
         dispatch({
             type: DELETE_PRODUCT_SUCCESS,
