@@ -142,7 +142,6 @@ const NewProduct = () => {
         specs.forEach((s) => {
             formData.append("specifications", JSON.stringify(s));
         });
-
         dispatch(createProduct(formData));
     }
 

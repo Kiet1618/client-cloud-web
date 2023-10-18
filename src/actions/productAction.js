@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import {
     ALL_PRODUCTS_FAIL,
     ALL_PRODUCTS_REQUEST,
@@ -99,7 +100,7 @@ export const getProductDetails = (id) => async (dispatch) => {
 export const newReview = (reviewData) => async (dispatch) => {
     try {
         dispatch({ type: NEW_REVIEW_REQUEST });
-        const config = { header: { "Content-Type": "application/json" } }
+        const config = { headers: { "Content-Type": "application/json" } }
         const { data } = await axios.put("https://kiettran.azurewebsites.net/api/v1/review", reviewData, config);
 
         dispatch({
@@ -137,8 +138,13 @@ export const getSliderProducts = () => async (dispatch) => {
 export const getAdminProducts = () => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_PRODUCTS_REQUEST });
+        const config = {
+            headers: {
+                'Authorization': Cookies.get("token")
+            },
+        }
 
-        const { data } = await axios.get('https://kiettran.azurewebsites.net/api/v1/admin/products');
+        const { data } = await axios.get('https://kiettran.azurewebsites.net/api/v1/admin/products', config);
 
         dispatch({
             type: ADMIN_PRODUCTS_SUCCESS,
@@ -155,8 +161,17 @@ export const getAdminProducts = () => async (dispatch) => {
 // New Product ---ADMIN
 export const createProduct = (productData) => async (dispatch) => {
     try {
+
         dispatch({ type: NEW_PRODUCT_REQUEST });
-        const config = { header: { "Content-Type": "application/json" } }
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': Cookies.get("token")
+            }
+        }
+
+        console.log(Cookies.get("token"))
+        console.log(config)
         const { data } = await axios.post("https://kiettran.azurewebsites.net/api/v1/admin/product/new", productData, config);
 
         dispatch({
@@ -175,7 +190,15 @@ export const createProduct = (productData) => async (dispatch) => {
 export const updateProduct = (id, productData) => async (dispatch) => {
     try {
         dispatch({ type: UPDATE_PRODUCT_REQUEST });
-        const config = { header: { "Content-Type": "application/json" } }
+        const config = {
+            header: {
+                "Content-Type": "application/json",
+                'Authorization': Cookies.get("token")
+
+
+
+            }
+        }
         const { data } = await axios.put(`https://kiettran.azurewebsites.net/api/v1/admin/product/${id}`, productData, config);
 
         dispatch({
@@ -212,7 +235,15 @@ export const deleteProduct = (id) => async (dispatch) => {
 export const getAllReviews = (id) => async (dispatch) => {
     try {
         dispatch({ type: ALL_REVIEWS_REQUEST });
-        const { data } = await axios.get(`https://kiettran.azurewebsites.net/api/v1/admin/reviews?id=${id}`);
+        const config = {
+            headerss: {
+                'Authorization': Cookies.get("token")
+
+
+
+            },
+        }
+        const { data } = await axios.get(`https://kiettran.azurewebsites.net/api/v1/admin/reviews?id=${id}`, config);
 
         dispatch({
             type: ALL_REVIEWS_SUCCESS,
@@ -230,7 +261,15 @@ export const getAllReviews = (id) => async (dispatch) => {
 export const deleteReview = (reviewId, productId) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_REVIEW_REQUEST });
-        const { data } = await axios.delete(`https://kiettran.azurewebsites.net/api/v1/admin/reviews?id=${reviewId}&productId=${productId}`);
+        const config = {
+            headers: {
+                'Authorization': Cookies.get("token")
+
+
+
+            },
+        }
+        const { data } = await axios.delete(`https://kiettran.azurewebsites.net/api/v1/admin/reviews?id=${reviewId}&productId=${productId}`, config);
 
         dispatch({
             type: DELETE_REVIEW_SUCCESS,

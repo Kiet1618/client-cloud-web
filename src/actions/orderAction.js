@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ALL_ORDERS_FAIL, ALL_ORDERS_REQUEST, ALL_ORDERS_SUCCESS, CLEAR_ERRORS, DELETE_ORDER_FAIL, DELETE_ORDER_REQUEST, DELETE_ORDER_SUCCESS, MY_ORDERS_FAIL, MY_ORDERS_REQUEST, MY_ORDERS_SUCCESS, NEW_ORDER_FAIL, NEW_ORDER_REQUEST, NEW_ORDER_SUCCESS, ORDER_DETAILS_FAIL, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, PAYMENT_STATUS_FAIL, PAYMENT_STATUS_REQUEST, PAYMENT_STATUS_SUCCESS, UPDATE_ORDER_FAIL, UPDATE_ORDER_REQUEST, UPDATE_ORDER_SUCCESS } from "../constants/orderConstants";
-
+import Cookies from "js-cookie";
 // New Order
 export const newOrder = (order) => async (dispatch) => {
     try {
@@ -9,6 +9,7 @@ export const newOrder = (order) => async (dispatch) => {
         const config = {
             headers: {
                 "Content-Type": "application/json",
+                'Authorization': Cookies.get("token")
             },
         };
 
@@ -32,7 +33,14 @@ export const myOrders = () => async (dispatch) => {
     try {
         dispatch({ type: MY_ORDERS_REQUEST });
 
-        const { data } = await axios.get('https://kiettran.azurewebsites.net/api/v1/orders/me');
+        const config = {
+            headers: {
+                'Authorization': Cookies.get("token")
+
+            },
+        }
+
+        const { data } = await axios.get('https://kiettran.azurewebsites.net/api/v1/orders/me', config);
 
         dispatch({
             type: MY_ORDERS_SUCCESS,
@@ -52,7 +60,16 @@ export const getOrderDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: ORDER_DETAILS_REQUEST });
 
-        const { data } = await axios.get(`https://kiettran.azurewebsites.net/api/v1/order/${id}`);
+        const config = {
+            headers: {
+                'Authorization': Cookies.get("token")
+
+
+
+            },
+        }
+
+        const { data } = await axios.get(`https://kiettran.azurewebsites.net/api/v1/order/${id}`, config);
 
         dispatch({
             type: ORDER_DETAILS_SUCCESS,
@@ -72,7 +89,16 @@ export const getPaymentStatus = (id) => async (dispatch) => {
     try {
         dispatch({ type: PAYMENT_STATUS_REQUEST });
 
-        const { data } = await axios.get(`https://kiettran.azurewebsites.net/api/v1/payment/status/${id}`);
+        const config = {
+            headers: {
+                'Authorization': Cookies.get("token")
+
+
+
+            },
+        }
+
+        const { data } = await axios.get(`https://kiettran.azurewebsites.net/api/v1/payment/status/${id}`, config);
 
         dispatch({
             type: PAYMENT_STATUS_SUCCESS,
@@ -92,7 +118,16 @@ export const getAllOrders = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_ORDERS_REQUEST });
 
-        const { data } = await axios.get('https://kiettran.azurewebsites.net/api/v1/admin/orders');
+        const config = {
+            headers: {
+                'Authorization': Cookies.get("token")
+
+
+
+            },
+        }
+
+        const { data } = await axios.get('https://kiettran.azurewebsites.net/api/v1/admin/orders', config);
 
         dispatch({
             type: ALL_ORDERS_SUCCESS,
@@ -115,6 +150,10 @@ export const updateOrder = (id, order) => async (dispatch) => {
         const config = {
             headers: {
                 "Content-Type": "application/json",
+                'Authorization': Cookies.get("token")
+
+
+
             },
         };
 
@@ -138,7 +177,16 @@ export const deleteOrder = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_ORDER_REQUEST });
 
-        const { data } = await axios.delete(`https://kiettran.azurewebsites.net/api/v1/admin/order/${id}`);
+        const config = {
+            headers: {
+                'Authorization': Cookies.get("token")
+
+
+
+            },
+        }
+
+        const { data } = await axios.delete(`https://kiettran.azurewebsites.net/api/v1/admin/order/${id}`, config);
 
         dispatch({
             type: DELETE_ORDER_SUCCESS,
