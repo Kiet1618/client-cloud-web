@@ -151,9 +151,6 @@ export const updateOrder = (id, order) => async (dispatch) => {
             headers: {
                 "Content-Type": "application/json",
                 'Authorization': Cookies.get("token")
-
-
-
             },
         };
 
